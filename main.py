@@ -4,6 +4,7 @@ from telebot import *
 import datetime
 from check_time import *
 import os
+import pytz
 
 os.environ['TZ'] = 'Asia/Tashkent'
 
