@@ -3,6 +3,9 @@ from config import *
 from telebot import *
 import datetime
 from check_time import *
+import os
+
+os.environ['TZ'] = 'Asia/Tashkent'
 
 
 bot = telebot.TeleBot(TOKEN)
