@@ -5,6 +5,8 @@ import datetime
 from check_time import *
 import os
 import pytz
+import time
+time.tzset()
 
 os.environ['TZ'] = 'Asia/Tashkent'
 
