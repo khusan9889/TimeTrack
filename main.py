@@ -6,9 +6,9 @@ from check_time import *
 import os
 import pytz
 import time
-time.tzset()
 
-os.environ['TZ'] = 'Asia/Tashkent'
+
+current_date = datetime.now(pytz.timezone('Asia/Tashkent'))
 
 
 bot = telebot.TeleBot(TOKEN)
@@ -66,7 +66,7 @@ def keldi(message):
 
     if message.text == "Пришел":
         #Запрашиваем причину позднего прихода
-        if  late_coming():
+        if late_coming():
             current_time = datetime.now().strftime("%H:%M")
             user_dict[message.chat.id] = User(current_time)
             msg = bot.send_message(
