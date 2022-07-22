@@ -4,10 +4,7 @@ from telebot import *
 import datetime
 from check_time import *
 
-import pytz
 
-
-current_date = datetime.now(pytz.timezone('Asia/Tashkent'))
 
 
 bot = telebot.TeleBot(TOKEN)
