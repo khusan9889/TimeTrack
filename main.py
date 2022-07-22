@@ -3,9 +3,8 @@ from config import *
 from telebot import *
 import datetime
 from check_time import *
-import os
+
 import pytz
-import time
 
 
 current_date = datetime.now(pytz.timezone('Asia/Tashkent'))
