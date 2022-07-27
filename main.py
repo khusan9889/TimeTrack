@@ -6,7 +6,7 @@ from check_time import *
 
 
 bot = telebot.TeleBot(TOKEN)
-admin_id = ADMIN_ID
+admin_id = ADMIN_ID, ADMIN_ID_X
 chat_id = CHAT_ID
 
 member_list = ['creator', 'administrator', 'member']
