@@ -29,6 +29,17 @@ def is_user_in_chat(user_id, chat_id = chat_id):
         return False
 
 
+#new send message to admins
+def send_message_to_admins( admins_id, text,parse_mode="HTML",disable_web_page_preview=True):
+    for admin_id in admins_id:
+        bot.send_message(
+            chat_id=admin_id,
+            text=text,
+            parse_mode=parse_mode,
+            disable_web_page_preview=disable_web_page_preview
+        )
+   
+
 
 @bot.message_handler(commands=['start'])
 def start(message):
@@ -92,12 +103,17 @@ def keldi(message):
             keyboard.add(button)
          
             #send to admin
-            bot.send_message(
-                chat_id=admin_id,
-                text = f"Keldi: <a href=\"https://t.me/{user_name}\"> {first_name}</a> - <b>{current_time}</b> ", 
-                parse_mode="HTML",
-                disable_web_page_preview=True
-                )
+            # bot.send_message(
+            #     chat_id=admin_id,
+            #     text = f"Keldi: <a href=\"https://t.me/{user_name}\"> {first_name}</a> - <b>{current_time}</b> ", 
+            #     parse_mode="HTML",
+            #     disable_web_page_preview=True
+            #     )
+
+            #new send to admins 
+            text = f"Keldi: <a href=\"https://t.me/{user_name}\"> {first_name}</a> - <b>{current_time}</b> ", 
+            send_message_to_admins(admins_id=ADMIN_ID, text=text)
+            
             #send to user
             bot.send_message(
                 chat_id=message.chat.id,
@@ -108,7 +124,7 @@ def keldi(message):
 
     elif message.text == "Kettim":
          #Запрашиваем причину раннего ухода
-        if early_leaving(): 
+        if  early_leaving(): 
             
             current_time = datetime.now().strftime("%H:%M")
             user_dict[message.chat.id] = User(current_time)
@@ -124,12 +140,17 @@ def keldi(message):
             exist = types.KeyboardButton(text='Bormayman')
             keyboard.add(button,exist) 
             #send to admin
-            bot.send_message(
-                chat_id=admin_id,
-                text = f"Ketti: <a href=\"https://t.me/{user_name}\"> {first_name}</a> - <b>{current_time}</b> ",
-                parse_mode="HTML",
-                disable_web_page_preview=True
-                )
+            # bot.send_message(
+            #     chat_id=admin_id,
+            #     text = f"Ketti: <a href=\"https://t.me/{user_name}\"> {first_name}</a> - <b>{current_time}</b> ",
+            #     parse_mode="HTML",
+            #     disable_web_page_preview=True
+            #     )
+
+            #new send to admins
+            text = f"Ketti: <a href=\"https://t.me/{user_name}\"> {first_name}</a> - <b>{current_time}</b> ",
+            send_message_to_admins(admins_id=ADMIN_ID, text=text)
+
             #send to user
             bot.send_message(
                 chat_id=message.chat.id,
@@ -179,12 +200,17 @@ def keldi(message):
             keyboard.add(button)
          
             #send to admin
-            bot.send_message(
-                chat_id=admin_id,
-                text = f"Пришел: <a href=\"https://t.me/{user_name}\"> {first_name}</a> - <b>{current_time}</b> ", 
-                parse_mode="HTML",
-                disable_web_page_preview=True
-                )
+            # bot.send_message(
+            #     chat_id=admin_id,
+            #     text = f"Пришел: <a href=\"https://t.me/{user_name}\"> {first_name}</a> - <b>{current_time}</b> ", 
+            #     parse_mode="HTML",
+            #     disable_web_page_preview=True
+            #     )
+
+            #new send to admins
+            text = f"Пришел: <a href=\"https://t.me/{user_name}\"> {first_name}</a> - <b>{current_time}</b> ",
+            send_message_to_admins(admins_id=ADMIN_ID, text=text)
+
             #send to user
             bot.send_message(
                 chat_id=message.chat.id,
@@ -211,12 +237,17 @@ def keldi(message):
             exist = types.KeyboardButton(text='Не приду')
             keyboard.add(button,exist) 
             #send to admin
-            bot.send_message(
-                chat_id=admin_id,
-                text = f"Ушел: <a href=\"https://t.me/{user_name}\"> {first_name}</a> - <b>{current_time}</b> ",
-                parse_mode="HTML",
-                disable_web_page_preview=True
-                )
+            # bot.send_message(
+            #     chat_id=admin_id,
+            #     text = f"Ушел: <a href=\"https://t.me/{user_name}\"> {first_name}</a> - <b>{current_time}</b> ",
+            #     parse_mode="HTML",
+            #     disable_web_page_preview=True
+            #     )
+
+            #new send to admins
+            text = f"Ушел: <a href=\"https://t.me/{user_name}\"> {first_name}</a> - <b>{current_time}</b> ",
+            send_message_to_admins(admins_id=ADMIN_ID, text=text)
+
             #send to user
             bot.send_message(
                 chat_id=message.chat.id,
@@ -253,6 +284,11 @@ def process_reason_late_uz(message):
         parse_mode="HTML",
         disable_web_page_preview=True
         )
+
+    #new send to admins
+    text = f"Kech qoldi: <a href=\"https://t.me/{user_name}\"> {first_name}</a> - <b>{user.time}</b> \n Sababi : {user.reason} ",
+    send_message_to_admins(admins_id=ADMIN_ID, text=text)
+    
     #send to user
     bot.send_message(
         chat_id=message.chat.id,
@@ -274,12 +310,17 @@ def process_reason_early_uz(message):
     exist = types.KeyboardButton(text='Bormayman')
     keyboard.add(button,exist) 
     #send to admin
-    bot.send_message(
-        chat_id=admin_id,
-        text = f"Erta ketti: <a href=\"https://t.me/{user_name}\"> {first_name}</a> - <b>{user.time}</b> \n Sababi : {user.reason} ",
-        parse_mode="HTML",
-        disable_web_page_preview=True
-        )
+    # bot.send_message(
+    #     chat_id=admin_id,
+    #     text = f"Erta ketti: <a href=\"https://t.me/{user_name}\"> {first_name}</a> - <b>{user.time}</b> \n Sababi : {user.reason} ",
+    #     parse_mode="HTML",
+    #     disable_web_page_preview=True
+    #     )
+
+    #new send to admins
+    text = f"Erta ketti: <a href=\"https://t.me/{user_name}\"> {first_name}</a> - <b>{user.time}</b> \n Sababi : {user.reason} ",
+    send_message_to_admins(admins_id=ADMIN_ID, text=text)
+
     #send to user
     bot.send_message(
         chat_id=message.chat.id,
@@ -297,12 +338,17 @@ def process_reason_exist_uz(message):
     user_name = message.from_user.username
     
     #send to admin
-    bot.send_message(
-        chat_id=admin_id,
-        text = f"Kelmadi: <a href=\"https://t.me/{user_name}\"> {first_name}</a> - <b>{user.time}</b> \n Sababi : {user.reason} ",
-        parse_mode="HTML",
-        disable_web_page_preview=True
-        )
+    # bot.send_message(
+    #     chat_id=admin_id,
+    #     text = f"Kelmadi: <a href=\"https://t.me/{user_name}\"> {first_name}</a> - <b>{user.time}</b> \n Sababi : {user.reason} ",
+    #     parse_mode="HTML",
+    #     disable_web_page_preview=True
+    #     )
+
+    #new send to admins
+    text = f"Kelmadi: <a href=\"https://t.me/{user_name}\"> {first_name}</a> - <b>{user.time}</b> \n Sababi : {user.reason} ",
+    send_message_to_admins(admins_id=ADMIN_ID, text=text)
+
     #send to user
     bot.send_message(
         chat_id=message.chat.id,
@@ -322,12 +368,17 @@ def process_reason_late(message):
     button = types.KeyboardButton(text="Ушел")
     keyboard.add(button) 
     #send to admin
-    bot.send_message(
-        chat_id=admin_id,
-        text = f"Опаздал: <a href=\"https://t.me/{user_name}\"> {first_name}</a> - <b>{user.time}</b> \n Причина : {user.reason} ",
-        parse_mode="HTML",
-        disable_web_page_preview=True
-        )
+    # bot.send_message(
+    #     chat_id=admin_id,
+    #     text = f"Опаздал: <a href=\"https://t.me/{user_name}\"> {first_name}</a> - <b>{user.time}</b> \n Причина : {user.reason} ",
+    #     parse_mode="HTML",
+    #     disable_web_page_preview=True
+    #     )
+
+    #new send to admins
+    text = f"Опаздал: <a href=\"https://t.me/{user_name}\"> {first_name}</a> - <b>{user.time}</b> \n Причина : {user.reason} ",
+    send_message_to_admins(admins_id=ADMIN_ID, text=text)
+
     #send to user
     bot.send_message(
         chat_id=message.chat.id,
@@ -349,12 +400,17 @@ def process_reason_early(message):
     exist = types.KeyboardButton(text='Не приду')
     keyboard.add(button,exist) 
     #send to admin
-    bot.send_message(
-        chat_id=admin_id,
-        text = f"Рано ушел: <a href=\"https://t.me/{user_name}\"> {first_name}</a> - <b>{user.time}</b> \n Причина : {user.reason} ",
-        parse_mode="HTML",
-        disable_web_page_preview=True
-        )
+    # bot.send_message(
+    #     chat_id=admin_id,
+    #     text = f"Рано ушел: <a href=\"https://t.me/{user_name}\"> {first_name}</a> - <b>{user.time}</b> \n Причина : {user.reason} ",
+    #     parse_mode="HTML",
+    #     disable_web_page_preview=True
+    #     )
+
+    #new send to admins
+    text = f"Рано ушел: <a href=\"https://t.me/{user_name}\"> {first_name}</a> - <b>{user.time}</b> \n Причина : {user.reason} "
+    send_message_to_admins(admins_id=ADMIN_ID, text=text)
+
     #send to user
     bot.send_message(
         chat_id=message.chat.id,
@@ -372,12 +428,17 @@ def process_reason_exist(message):
     user_name = message.from_user.username
     
     #send to admin
-    bot.send_message(
-        chat_id=admin_id,
-        text = f"Не пришел: <a href=\"https://t.me/{user_name}\"> {first_name}</a> - <b>{user.time}</b> \n Причина : {user.reason} ",
-        parse_mode="HTML",
-        disable_web_page_preview=True
-        )
+    # bot.send_message(
+    #     chat_id=admin_id,
+    #     text = f"Не пришел: <a href=\"https://t.me/{user_name}\"> {first_name}</a> - <b>{user.time}</b> \n Причина : {user.reason} ",
+    #     parse_mode="HTML",
+    #     disable_web_page_preview=True
+    #     )
+
+    #new send to admins
+    text = f"Не пришел: <a href=\"https://t.me/{user_name}\"> {first_name}</a> - <b>{user.time}</b> \n Причина : {user.reason} "
+    send_message_to_admins(admins_id=ADMIN_ID, text=text)
+
     #send to user
     bot.send_message(
         chat_id=message.chat.id,
@@ -390,8 +451,8 @@ def process_reason_exist(message):
 
 
 if __name__ == '__main__':
-
-    bot.infinity_polling()
+    #new ''timeout=15,none_stop=True''
+    bot.infinity_polling( timeout=15,none_stop=True )
 
 
 
